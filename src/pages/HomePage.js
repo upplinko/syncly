@@ -220,7 +220,7 @@ function HomePage() {
           minHeight="calc(100vh)"  
           pb={16}
           gap={12}
-          pt="160px"
+          pt={0}
           color="gray.800"
           textAlign={{ base: 'center', md: 'left' }}
           position="relative"

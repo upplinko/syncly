@@ -11,10 +11,11 @@ import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import PricingPage from './pages/PricingPage';
 import Navbar from './components/Navbar';
+import Layout from './components/Layout';
 
 function App() {
   return (
-    <>
+    <Layout>
       <Navbar />
       <Routes>
         <Route path="/login" element={<LoginPage />} />
@@ -28,7 +29,7 @@ function App() {
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/" element={<HomePage />} />
       </Routes>
-    </>
+    </Layout>
   );
 }
 
