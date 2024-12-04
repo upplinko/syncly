@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Box, 
   Container, 
@@ -25,6 +25,23 @@ function Navbar() {
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      if (offset > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <Box 
@@ -33,8 +50,10 @@ function Navbar() {
       left="0" 
       right="0" 
       zIndex="100" 
-      bg="transparent"
-      boxShadow="none"
+      bg={scrolled ? "rgba(17, 24, 39, 0.9)" : "transparent"}
+      backdropFilter={scrolled ? "blur(10px)" : "none"}
+      transition="background 0.3s ease, backdrop-filter 0.3s ease"
+      boxShadow={scrolled ? "0 4px 6px rgba(0, 0, 0, 0.1)" : "none"}
     >
       <Container maxW="container.xl">
         <Flex 
@@ -44,27 +63,30 @@ function Navbar() {
         >
           {/* Logo */}
           <Image 
-            src="/images/logodark.svg" 
+            src={scrolled ? "/images/logowhite.svg" : "/images/logodark.svg"}
             alt="Syncly Logo" 
             height="40px"
             onClick={() => navigate('/')}
             cursor="pointer"
+            transition="all 0.3s ease"
           />
 
           {/* Desktop Navigation */}
           <HStack 
             spacing={6} 
-            color="gray.600"
+            color={scrolled ? "white" : "gray.600"}
             display={{ base: 'none', md: 'flex' }}
           >
             <ChakraLink 
               as={RouterLink} 
               to="/"
               _hover={{ 
-                color: 'gray.800',
+                color: scrolled ? 'whiteAlpha.700' : 'gray.800',
                 textDecoration: 'none',
-                bgGradient: "linear(to-r, #179c5f, #46cc6b)",
-                bgClip: "text"
+                ...(scrolled ? {} : {
+                  bgGradient: "linear(to-r, #179c5f, #46cc6b)",
+                  bgClip: "text"
+                })
               }}
             >
               Home
@@ -73,10 +95,12 @@ function Navbar() {
               as={RouterLink} 
               to="/pricing"
               _hover={{ 
-                color: 'gray.800',
+                color: scrolled ? 'whiteAlpha.700' : 'gray.800',
                 textDecoration: 'none',
-                bgGradient: "linear(to-r, #179c5f, #46cc6b)",
-                bgClip: "text"
+                ...(scrolled ? {} : {
+                  bgGradient: "linear(to-r, #179c5f, #46cc6b)",
+                  bgClip: "text"
+                })
               }}
             >
               Pricing
@@ -84,9 +108,11 @@ function Navbar() {
             <Text 
               cursor="pointer" 
               _hover={{ 
-                color: 'gray.800',
-                bgGradient: "linear(to-r, #179c5f, #46cc6b)",
-                bgClip: "text"
+                color: scrolled ? 'whiteAlpha.700' : 'gray.800',
+                ...(scrolled ? {} : {
+                  bgGradient: "linear(to-r, #179c5f, #46cc6b)",
+                  bgClip: "text"
+                })
               }}
             >
               Features
@@ -94,9 +120,11 @@ function Navbar() {
             <Text 
               cursor="pointer" 
               _hover={{ 
-                color: 'gray.800',
-                bgGradient: "linear(to-r, #179c5f, #46cc6b)",
-                bgClip: "text"
+                color: scrolled ? 'whiteAlpha.700' : 'gray.800',
+                ...(scrolled ? {} : {
+                  bgGradient: "linear(to-r, #179c5f, #46cc6b)",
+                  bgClip: "text"
+                })
               }}
             >
               About
@@ -111,6 +139,7 @@ function Navbar() {
             icon={<HamburgerIcon />}
             variant="outline"
             aria-label="Open Menu"
+            color={scrolled ? "white" : "gray.600"}
           />
 
           {/* Mobile Drawer Menu */}
@@ -180,11 +209,11 @@ function Navbar() {
             <Button 
               size="md"
               variant="outline"
-              borderColor="gray.300"
-              color="gray.700"
+              borderColor={scrolled ? "whiteAlpha.300" : "gray.300"}
+              color={scrolled ? "white" : "gray.700"}
               _hover={{
-                bg: 'gray.100',
-                borderColor: 'gray.400'
+                bg: scrolled ? 'whiteAlpha.100' : 'gray.100',
+                borderColor: scrolled ? 'whiteAlpha.500' : 'gray.400'
               }}
               onClick={() => navigate('/login')}
             >
