@@ -333,7 +333,7 @@ function HomePage() {
                 <FeatureCard 
                   icon={RiCalendarCheckLine}
                   title="Smart Scheduling"
-                  description="AI-powered calendar management that learns and adapts to your preferences."
+                  description="AI-powered calendar management that learns and adapts for you."
                 />
               </GridItem>
               <GridItem>
