@@ -1,6 +1,10 @@
 import { extendTheme } from '@chakra-ui/react';
 
 const theme = extendTheme({
+  fonts: {
+    heading: "'Plus Jakarta Sans', 'Inter', sans-serif",
+    body: "'Poppins', 'Inter', sans-serif"
+  },
   colors: {
     syncly: {
       primary: '#1A365D',    // Deep Navy Blue
@@ -13,6 +17,7 @@ const theme = extendTheme({
   components: {
     Button: {
       baseStyle: {
+        fontFamily: "'Inter', sans-serif",
         _hover: {
           transform: 'translateY(-2px)',
           boxShadow: 'md'
@@ -41,7 +46,17 @@ const theme = extendTheme({
     global: {
       body: {
         bg: 'syncly.background',
-        color: 'gray.800'
+        color: 'gray.800',
+        fontFamily: "'Poppins', 'Inter', sans-serif"
+      },
+      h1: {
+        fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif"
+      },
+      h2: {
+        fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif"
+      },
+      h3: {
+        fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif"
       }
     }
   }

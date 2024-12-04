@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/icons": "^2.2.4",
     "@chakra-ui/react": "^2.8.1",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -10,7 +11,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
     "formik": "^2.4.3",
-    "framer-motion": "^10.15.0",
+    "framer-motion": "^10.18.0",
     "moment": "^2.30.1",
     "react": "^18.2.0",
     "react-big-calendar": "^1.16.3",

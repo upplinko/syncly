@@ -1,112 +1,71 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { 
   Box, 
   VStack, 
-  HStack, 
+  Flex, 
   Heading, 
   Text, 
   Button, 
-  Container, 
-  Flex, 
-  Icon,
-  Grid,
-  GridItem,
-  Spacer,
-  Image,
-  Tag,
+  HStack, 
+  Grid, 
+  GridItem, 
+  Tag, 
   TagLabel,
-  Divider,
-  Link,
-  Stack
+  Icon
 } from '@chakra-ui/react';
 import { 
+  RiStarLine, 
+  RiArrowRightLine, 
+  RiPlayCircleLine, 
   RiCalendarCheckLine, 
   RiTeamLine, 
   RiTimeLine, 
-  RiCloudLine,
-  RiStarLine,
-  RiRocketLine,
-  RiTwitterFill,
-  RiLinkedinFill,
-  RiGithubFill,
-  RiFacebookFill
+  RiCloudLine 
 } from 'react-icons/ri';
+import { motion } from 'framer-motion';
 
-const Navbar = () => {
-  return (
-    <Box 
-      position="fixed" 
-      top="0" 
-      left="0" 
-      right="0" 
-      zIndex="100" 
-      bg="rgba(255,255,255,0.8)" 
-      backdropFilter="blur(10px)"
-      boxShadow="sm"
-    >
-      <Container maxW="container.xl">
-        <Flex 
-          align="center" 
-          justify="space-between" 
-          py={4}
-        >
-          {/* Logo */}
-          <Flex align="center" cursor="pointer">
-            <Image 
-              src="/images/logolight.svg" 
-              alt="Syncly Logo" 
-              height="40px" 
-              objectFit="contain"
-              mr={2}
-            />
-          </Flex>
+// Background animation variants
+const backgroundVariants = {
+  initial: { 
+    opacity: 0.6,
+    scale: 1,
+    background: 'linear-gradient(135deg, rgba(23,156,95,0.05) 0%, rgba(70,204,107,0.05) 100%)'
+  },
+  animate: {
+    opacity: [0.6, 0.7, 0.6],
+    scale: [1, 1.02, 1],
+    background: [
+      'linear-gradient(135deg, rgba(23,156,95,0.05) 0%, rgba(70,204,107,0.05) 100%)',
+      'linear-gradient(135deg, rgba(70,204,107,0.08) 0%, rgba(23,156,95,0.08) 100%)',
+      'linear-gradient(135deg, rgba(23,156,95,0.05) 0%, rgba(70,204,107,0.05) 100%)'
+    ],
+    transition: {
+      duration: 6,
+      ease: 'easeInOut',
+      repeat: Infinity,
+      repeatType: 'loop'
+    }
+  }
+};
 
-          {/* Navigation Links */}
-          <HStack spacing={6} color="syncly.muted">
-            <Text 
-              cursor="pointer" 
-              _hover={{ color: 'syncly.accent' }}
-            >
-              Features
-            </Text>
-            <Text 
-              cursor="pointer" 
-              _hover={{ color: 'syncly.accent' }}
-            >
-              Pricing
-            </Text>
-            <Text 
-              cursor="pointer" 
-              _hover={{ color: 'syncly.accent' }}
-            >
-              About
-            </Text>
-          </HStack>
-
-          {/* CTA Buttons */}
-          <HStack spacing={4}>
-            <Button 
-              variant="outline" 
-              borderColor="syncly.primary"
-              color="syncly.primary"
-            >
-              Login
-            </Button>
-            <Button 
-              bg="syncly.primary" 
-              color="white"
-              _hover={{
-                bg: 'syncly.secondary'
-              }}
-            >
-              Get Started
-            </Button>
-          </HStack>
-        </Flex>
-      </Container>
-    </Box>
-  );
+const backgroundElementVariants = {
+  initial: { 
+    opacity: 0,
+    y: 50,
+    rotate: 0
+  },
+  animate: {
+    opacity: [0, 0.2, 0],
+    y: [50, -50, 50],
+    rotate: [0, 15, -15, 0],
+    transition: {
+      duration: 8,
+      ease: 'easeInOut',
+      repeat: Infinity,
+      repeatType: 'loop'
+    }
+  }
 };
 
 const FeatureCard = ({ icon, title, description }) => (
@@ -114,255 +73,241 @@ const FeatureCard = ({ icon, title, description }) => (
     bg="white" 
     p={6} 
     borderRadius="xl" 
-    boxShadow="premium" 
+    border="1px solid"
+    borderColor="gray.200"
+    boxShadow="md"
     transition="all 0.3s ease"
+    position="relative"
+    overflow="hidden"
     _hover={{
       transform: 'translateY(-10px)',
-      boxShadow: '2xl'
+      boxShadow: 'xl',
+      bgGradient: "linear(to-r, #179c5f, #46cc6b)",
     }}
   >
-    <VStack spacing={4} align="start">
+    <VStack 
+      spacing={4} 
+      align="start"
+      position="relative"
+      zIndex="10"
+      _hover={{
+        '& > *': {
+          color: 'white'
+        }
+      }}
+    >
       <Icon 
-        as={icon} 
+        as={icon}
         w={10} 
-        h={10} 
-        color="syncly.accent" 
+        h={10}
+        color="syncly.primary"
+        transition="color 0.3s ease"
+        _hover={{
+          color: "white"
+        }}
       />
-      <Heading size="md" color="syncly.primary">{title}</Heading>
-      <Text color="syncly.muted">{description}</Text>
+      <Heading 
+        as="h3" 
+        size="md" 
+        mb={2}
+        color="gray.800"
+        transition="color 0.3s ease"
+        _hover={{
+          color: "white"
+        }}
+      >
+        {title}
+      </Heading>
+      <Text
+        color="gray.600"
+        transition="color 0.3s ease"
+        _hover={{
+          color: "white"
+        }}
+      >
+        {description}
+      </Text>
     </VStack>
   </Box>
 );
 
-// Footer Component
-const Footer = () => {
-  return (
-    <Box 
-      bg="syncly.primary" 
-      color="white" 
-      py={16}
-    >
-      <Container maxW="container.xl">
-        <Grid 
-          templateColumns={{ 
-            base: '1fr', 
-            md: 'repeat(4, 1fr)' 
-          }} 
-          gap={8}
-        >
-          {/* Logo and Description */}
-          <GridItem>
-            <VStack align="start" spacing={4}>
-              <Image 
-                src="/images/logodark.svg" 
-                alt="Syncly Logo" 
-                height="40px" 
-                objectFit="contain"
-              />
-              <Text fontSize="sm" color="whiteAlpha.700">
-                Syncly transforms your scheduling workflow with AI-powered precision 
-                and seamless integrations.
-              </Text>
-              <HStack spacing={4}>
-                <Link href="#" isExternal>
-                  <Icon as={RiTwitterFill} w={6} h={6} color="whiteAlpha.800" _hover={{ color: 'white' }} />
-                </Link>
-                <Link href="#" isExternal>
-                  <Icon as={RiLinkedinFill} w={6} h={6} color="whiteAlpha.800" _hover={{ color: 'white' }} />
-                </Link>
-                <Link href="#" isExternal>
-                  <Icon as={RiGithubFill} w={6} h={6} color="whiteAlpha.800" _hover={{ color: 'white' }} />
-                </Link>
-                <Link href="#" isExternal>
-                  <Icon as={RiFacebookFill} w={6} h={6} color="whiteAlpha.800" _hover={{ color: 'white' }} />
-                </Link>
-              </HStack>
-            </VStack>
-          </GridItem>
-
-          {/* Product Links */}
-          <GridItem>
-            <VStack align="start" spacing={4}>
-              <Heading size="sm" mb={2}>Product</Heading>
-              <Link color="whiteAlpha.700" _hover={{ color: 'white' }}>Features</Link>
-              <Link color="whiteAlpha.700" _hover={{ color: 'white' }}>Pricing</Link>
-              <Link color="whiteAlpha.700" _hover={{ color: 'white' }}>Integrations</Link>
-              <Link color="whiteAlpha.700" _hover={{ color: 'white' }}>Demo</Link>
-            </VStack>
-          </GridItem>
-
-          {/* Company Links */}
-          <GridItem>
-            <VStack align="start" spacing={4}>
-              <Heading size="sm" mb={2}>Company</Heading>
-              <Link color="whiteAlpha.700" _hover={{ color: 'white' }}>About Us</Link>
-              <Link color="whiteAlpha.700" _hover={{ color: 'white' }}>Careers</Link>
-              <Link color="whiteAlpha.700" _hover={{ color: 'white' }}>Press</Link>
-              <Link color="whiteAlpha.700" _hover={{ color: 'white' }}>Contact</Link>
-            </VStack>
-          </GridItem>
-
-          {/* Legal Links */}
-          <GridItem>
-            <VStack align="start" spacing={4}>
-              <Heading size="sm" mb={2}>Legal</Heading>
-              <Link color="whiteAlpha.700" _hover={{ color: 'white' }}>Terms of Service</Link>
-              <Link color="whiteAlpha.700" _hover={{ color: 'white' }}>Privacy Policy</Link>
-              <Link color="whiteAlpha.700" _hover={{ color: 'white' }}>Cookie Policy</Link>
-              <Link color="whiteAlpha.700" _hover={{ color: 'white' }}>GDPR</Link>
-            </VStack>
-          </GridItem>
-        </Grid>
-
-        {/* Copyright */}
-        <Divider my={8} borderColor="whiteAlpha.300" />
-        <Flex 
-          direction={{ base: 'column', md: 'row' }} 
-          align="center" 
-          justify="space-between"
-        >
-          <Text fontSize="sm" color="whiteAlpha.700">
-            {new Date().getFullYear()} Syncly. All rights reserved.
-          </Text>
-          <HStack spacing={4} mt={{ base: 4, md: 0 }}>
-            <Link color="whiteAlpha.700" _hover={{ color: 'white' }} fontSize="sm">
-              Privacy Policy
-            </Link>
-            <Link color="whiteAlpha.700" _hover={{ color: 'white' }} fontSize="sm">
-              Terms of Service
-            </Link>
-          </HStack>
-        </Flex>
-      </Container>
-    </Box>
-  );
-};
-
 function HomePage() {
+  const navigate = useNavigate();
   return (
     <Box 
-      bg="syncly.background" 
+      bg="gray.50" 
       minHeight="100vh" 
       position="relative" 
       overflow="hidden"
+      color="gray.800"
+      pt="0"
     >
-      {/* Navbar */}
-      <Navbar />
-
       {/* Gradient Background */}
       <Box
         position="absolute"
-        top="0"
+        top="-72px"
         left="0"
         right="0"
         bottom="0"
-        className="animated-gradient"
+        bg="gray.50"
         zIndex="0"
       />
 
       {/* Hero Section */}
-      <Container maxW="container.xl" position="relative" zIndex="10" pt={20}>
+      <Box 
+        position="relative" 
+        width="full" 
+        minHeight="100vh" 
+        overflow="hidden"
+      >
+        <motion.div
+          initial="initial"
+          animate="animate"
+          variants={backgroundVariants}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: -1,
+            background: 'linear-gradient(135deg, rgba(23,156,95,0.05) 0%, rgba(70,204,107,0.05) 100%)'
+          }}
+        />
+        
+        {/* Subtle animated background elements */}
+        <motion.div
+          initial="initial"
+          animate="animate"
+          variants={backgroundElementVariants}
+          style={{
+            position: 'absolute',
+            top: '10%',
+            right: '10%',
+            width: '200px',
+            height: '200px',
+            background: 'rgba(70,204,107,0.05)',
+            borderRadius: '50%',
+            filter: 'blur(80px)',
+            zIndex: -2
+          }}
+        />
+        
+        <motion.div
+          initial="initial"
+          animate="animate"
+          variants={backgroundElementVariants}
+          style={{
+            position: 'absolute',
+            bottom: '10%',
+            left: '10%',
+            width: '250px',
+            height: '250px',
+            background: 'rgba(23,156,95,0.05)',
+            borderRadius: '50%',
+            filter: 'blur(80px)',
+            zIndex: -2
+          }}
+        />
+
         <Flex 
+          maxW="container.xl"
+          mx="auto"
+          px={4}
           direction={{ base: 'column', md: 'row' }}
           align="center" 
-          justify="space-between" 
-          minHeight="calc(100vh - 80px)"
-          pt={20}
-          pb={20}
+          justify="center"  
+          minHeight="calc(100vh)"  
+          pb={16}
           gap={12}
+          pt="160px"
+          color="gray.800"
+          textAlign={{ base: 'center', md: 'left' }}
+          position="relative"
+          zIndex={1}
         >
           {/* Left Content */}
           <VStack 
-            align="start" 
+            align={{ base: 'center', md: 'start' }}
             spacing={6} 
             maxW="500px" 
+            width={{ base: '100%', md: '50%' }}
             pr={{ md: 10 }}
+            mx="auto"
           >
             {/* Trending Tag */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+            <Tag 
+              size="lg" 
+              variant="subtle" 
+              bg="linear-gradient(to right, #179c5f, #46cc6b)"
+              color="white"
+              mb={4}
             >
-              <Tag 
-                size="lg" 
-                colorScheme="blue" 
-                borderRadius="full"
-                mb={4}
-              >
-                <RiStarLine style={{ marginRight: '8px' }} />
-                <TagLabel>Trending Scheduling Platform</TagLabel>
-              </Tag>
-            </motion.div>
+              <RiStarLine style={{ marginRight: '8px', color: 'white' }} />
+              <TagLabel>Trending Scheduling Platform</TagLabel>
+            </Tag>
 
             {/* Headline */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-              style={{ width: '100%' }}
+            <Heading 
+              as="h1" 
+              size="3xl" 
+              lineHeight="1.2"
+              mb={4}
+              color="gray.800"
             >
-              <Heading 
-                as="h1" 
-                size="3xl" 
-                lineHeight="shorter"
-                fontWeight="bold"
-                color="gray.800"
-                mb={4}
+              Scheduling
+              <Text 
+                as="span" 
+                display="block" 
+                bgGradient="linear(to-r, #179c5f, #46cc6b)"
+                bgClip="text"
               >
-                Intelligent Scheduling 
-                <Text 
-                  as="span" 
-                  display="block"
-                  color="syncly.accent"
-                >
-                  Made Effortless
-                </Text>
-              </Heading>
-            </motion.div>
+                Made Effortless
+              </Text>
+            </Heading>
 
             {/* Subtext */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9 }}
+            <Text 
+              fontSize="xl" 
+              color="gray.600"
+              mb={6}
             >
-              <Text 
-                fontSize="xl" 
-                color="syncly.muted"
-                lineHeight="tall"
-                position="relative"
-                _before={{
-                  content: '""',
-                  position: 'absolute',
-                  bottom: '-8px',
-                  left: 0,
-                  width: '80px',
-                  height: '4px',
-                  bg: 'syncly.accent',
-                  borderRadius: 'full'
-                }}
-                pb={4}
-              >
-                Syncly transforms your scheduling workflow with AI-powered precision, 
-                seamless integrations, and an intuitive interface that adapts to your 
-                professional rhythm.
-              </Text>
-            </motion.div>
+              Revolutionize your time management with Syncly's AI-powered 
+              scheduling solution. Experience intelligent planning, 
+              seamless integrations, and an intuitive interface that adapts to your 
+              professional rhythm.
+            </Text>
 
             {/* CTA Buttons */}
-            <HStack spacing={4}>
+            <HStack 
+              spacing={4} 
+              width="full" 
+              justify={{ base: 'center', md: 'start' }}
+            >
               <Button 
-                size="lg" 
-                variant="solid"
-                rightIcon={<RiRocketLine />}
-                fontWeight="bold"
+                size="lg"
+                bgGradient="linear(to-r, #179c5f, #46cc6b)"
+                color="white"
+                _hover={{
+                  bgGradient: "linear(to-r, #46cc6b, #179c5f)",
+                  transform: 'translateY(-2px)'
+                }}
+                rightIcon={<RiArrowRightLine />}
+                onClick={() => navigate('/signup')}
               >
-                Start Free Trial
+                Get Started
               </Button>
               <Button 
-                size="lg" 
+                size="lg"
                 variant="outline"
+                borderColor="gray.300"
+                color="gray.700"
+                _hover={{
+                  bg: 'gray.100',
+                  borderColor: 'gray.400'
+                }}
+                leftIcon={<RiPlayCircleLine />}
+                onClick={() => navigate('/demo')}
               >
                 Watch Demo
               </Button>
@@ -370,32 +315,39 @@ function HomePage() {
           </VStack>
 
           {/* Right Content */}
-          <VStack spacing={8} maxW="600px" width="100%">
+          <VStack 
+            spacing={8} 
+            maxW="600px" 
+            width={{ base: '100%', md: '50%' }}
+            position="relative"
+            mx="auto"
+          >
             {/* Feature Grid */}
             <Grid 
               templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }}
               gap={6} 
               width="100%"
+              position="relative"
             >
               <GridItem>
                 <FeatureCard 
                   icon={RiCalendarCheckLine}
                   title="Smart Scheduling"
-                  description="AI-driven calendar optimization that learns your preferences."
+                  description="AI-powered calendar management that learns and adapts to your preferences."
                 />
               </GridItem>
               <GridItem>
                 <FeatureCard 
                   icon={RiTeamLine}
                   title="Team Collaboration"
-                  description="Seamless scheduling across multiple team members and time zones."
+                  description="Seamless coordination and scheduling across your entire team."
                 />
               </GridItem>
               <GridItem>
                 <FeatureCard 
                   icon={RiTimeLine}
-                  title="Time Efficiency"
-                  description="Reduce scheduling conflicts and maximize productive hours."
+                  title="Time Optimization"
+                  description="Intelligent algorithms to maximize productivity and minimize conflicts."
                 />
               </GridItem>
               <GridItem>
@@ -408,10 +360,7 @@ function HomePage() {
             </Grid>
           </VStack>
         </Flex>
-      </Container>
-      
-      {/* Footer */}
-      <Footer />
+      </Box>
     </Box>
   );
 }

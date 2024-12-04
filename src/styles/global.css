@@ -2,10 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom global styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   @apply text-syncly-text bg-syncly-background;
   font-family: 'Inter', sans-serif;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 /* Custom scrollbar */
