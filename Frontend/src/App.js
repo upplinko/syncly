@@ -1,20 +1,21 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
 import Dashboard from './pages/Dashboard';
 import BookingPage from './pages/BookingPage';
-import AdminPage from './pages/AdminPage';
-import EventTypes from './pages/EventTypes';
-import TeamPage from './pages/TeamPage';
-import SettingsPage from './pages/SettingsPage';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import PricingPage from './pages/PricingPage';
-import Navbar from './components/Navbar';
-import Layout from './components/Layout';
+import EventTypes from './pages/EventTypes';
+import AdminPage from './pages/AdminPage';
+import TeamPage from './pages/TeamPage';
+import SettingsPage from './pages/SettingsPage';
 import ContactPage from './pages/ContactPage';
 import FeaturesPage from './pages/FeaturesPage';
 import AboutPage from './pages/AboutPage';
+import OAuthDiagnostic from './components/OAuthDiagnostic';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/features" element={<FeaturesPage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/oauth-diagnostic" element={<OAuthDiagnostic />} />
         <Route path="/" element={<HomePage />} />
       </Routes>
     </Layout>
