@@ -23,50 +23,6 @@ import {
   RiTimeLine, 
   RiCloudLine 
 } from 'react-icons/ri';
-import { motion } from 'framer-motion';
-
-// Background animation variants
-const backgroundVariants = {
-  initial: { 
-    opacity: 0.6,
-    scale: 1,
-    background: 'linear-gradient(135deg, rgba(23,156,95,0.05) 0%, rgba(70,204,107,0.05) 100%)'
-  },
-  animate: {
-    opacity: [0.6, 0.7, 0.6],
-    scale: [1, 1.02, 1],
-    background: [
-      'linear-gradient(135deg, rgba(23,156,95,0.05) 0%, rgba(70,204,107,0.05) 100%)',
-      'linear-gradient(135deg, rgba(70,204,107,0.08) 0%, rgba(23,156,95,0.08) 100%)',
-      'linear-gradient(135deg, rgba(23,156,95,0.05) 0%, rgba(70,204,107,0.05) 100%)'
-    ],
-    transition: {
-      duration: 6,
-      ease: 'easeInOut',
-      repeat: Infinity,
-      repeatType: 'loop'
-    }
-  }
-};
-
-const backgroundElementVariants = {
-  initial: { 
-    opacity: 0,
-    y: 50,
-    rotate: 0
-  },
-  animate: {
-    opacity: [0, 0.2, 0],
-    y: [50, -50, 50],
-    rotate: [0, 15, -15, 0],
-    transition: {
-      duration: 8,
-      ease: 'easeInOut',
-      repeat: Infinity,
-      repeatType: 'loop'
-    }
-  }
-};
 
 const FeatureCard = ({ icon, title, description }) => (
   <Box 
@@ -160,54 +116,28 @@ function HomePage() {
         minHeight="100vh" 
         overflow="hidden"
       >
-        <motion.div
-          initial="initial"
-          animate="animate"
-          variants={backgroundVariants}
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            zIndex: -1,
-            background: 'linear-gradient(135deg, rgba(23,156,95,0.05) 0%, rgba(70,204,107,0.05) 100%)'
-          }}
+        <Box
+          position="absolute"
+          top="10%"
+          right="10%"
+          width="200px"
+          height="200px"
+          background="rgba(70,204,107,0.05)"
+          borderRadius="50%"
+          filter="blur(80px)"
+          zIndex="-2"
         />
         
-        {/* Subtle animated background elements */}
-        <motion.div
-          initial="initial"
-          animate="animate"
-          variants={backgroundElementVariants}
-          style={{
-            position: 'absolute',
-            top: '10%',
-            right: '10%',
-            width: '200px',
-            height: '200px',
-            background: 'rgba(70,204,107,0.05)',
-            borderRadius: '50%',
-            filter: 'blur(80px)',
-            zIndex: -2
-          }}
-        />
-        
-        <motion.div
-          initial="initial"
-          animate="animate"
-          variants={backgroundElementVariants}
-          style={{
-            position: 'absolute',
-            bottom: '10%',
-            left: '10%',
-            width: '250px',
-            height: '250px',
-            background: 'rgba(23,156,95,0.05)',
-            borderRadius: '50%',
-            filter: 'blur(80px)',
-            zIndex: -2
-          }}
+        <Box
+          position="absolute"
+          bottom="10%"
+          left="10%"
+          width="250px"
+          height="250px"
+          background="rgba(23,156,95,0.05)"
+          borderRadius="50%"
+          filter="blur(80px)"
+          zIndex="-2"
         />
 
         <Flex 
@@ -220,7 +150,7 @@ function HomePage() {
           minHeight="calc(100vh)"  
           pb={16}
           gap={12}
-          pt={0}
+          pt={{ base: '90px', md: 0 }}
           color="gray.800"
           textAlign={{ base: 'center', md: 'left' }}
           position="relative"

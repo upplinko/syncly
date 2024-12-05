@@ -12,6 +12,7 @@ import SignUpPage from './pages/SignUpPage';
 import PricingPage from './pages/PricingPage';
 import Navbar from './components/Navbar';
 import Layout from './components/Layout';
+import ContactPage from './pages/ContactPage';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/team" element={<TeamPage />} />
         <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="/" element={<HomePage />} />
       </Routes>
     </Layout>

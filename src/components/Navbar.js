@@ -129,6 +129,18 @@ function Navbar() {
             >
               About
             </Text>
+            <Text 
+              cursor="pointer" 
+              _hover={{ 
+                color: scrolled ? 'whiteAlpha.700' : 'gray.800',
+                ...(scrolled ? {} : {
+                  bgGradient: "linear(to-r, #179c5f, #46cc6b)",
+                  bgClip: "text"
+                })
+              }}
+            >
+              Contact
+            </Text>
           </HStack>
 
           {/* Mobile Hamburger Menu */}
@@ -195,6 +207,15 @@ function Navbar() {
                     }}
                   >
                     About
+                  </Text>
+                  <Text 
+                    cursor="pointer"
+                    onClick={onClose}
+                    _hover={{ 
+                      color: 'green.500'
+                    }}
+                  >
+                    Contact
                   </Text>
                 </VStack>
               </DrawerBody>
