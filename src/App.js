@@ -13,6 +13,8 @@ import PricingPage from './pages/PricingPage';
 import Navbar from './components/Navbar';
 import Layout from './components/Layout';
 import ContactPage from './pages/ContactPage';
+import FeaturesPage from './pages/FeaturesPage';
+import AboutPage from './pages/AboutPage';
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
         <Route path="/team" element={<TeamPage />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/features" element={<FeaturesPage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/" element={<HomePage />} />
       </Routes>
     </Layout>

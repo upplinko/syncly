@@ -76,6 +76,7 @@ function Navbar() {
             spacing={6} 
             color={scrolled ? "white" : "gray.600"}
             display={{ base: 'none', md: 'flex' }}
+            alignItems="center"
           >
             <ChakraLink 
               as={RouterLink} 
@@ -89,7 +90,35 @@ function Navbar() {
                 })
               }}
             >
-              Home
+              <Text 
+                fontWeight="medium" 
+                color={scrolled ? "white" : "gray.600"}
+                transition="color 0.3s ease"
+                _hover={{ color: scrolled ? 'whiteAlpha.700' : 'gray.800' }}
+              >
+                Home
+              </Text>
+            </ChakraLink>
+            <ChakraLink 
+              as={RouterLink} 
+              to="/features"
+              _hover={{ 
+                color: scrolled ? 'whiteAlpha.700' : 'gray.800',
+                textDecoration: 'none',
+                ...(scrolled ? {} : {
+                  bgGradient: "linear(to-r, #179c5f, #46cc6b)",
+                  bgClip: "text"
+                })
+              }}
+            >
+              <Text 
+                fontWeight="medium" 
+                color={scrolled ? "white" : "gray.600"}
+                transition="color 0.3s ease"
+                _hover={{ color: scrolled ? 'whiteAlpha.700' : 'gray.800' }}
+              >
+                Features
+              </Text>
             </ChakraLink>
             <ChakraLink 
               as={RouterLink} 
@@ -103,44 +132,57 @@ function Navbar() {
                 })
               }}
             >
-              Pricing
+              <Text 
+                fontWeight="medium" 
+                color={scrolled ? "white" : "gray.600"}
+                transition="color 0.3s ease"
+                _hover={{ color: scrolled ? 'whiteAlpha.700' : 'gray.800' }}
+              >
+                Pricing
+              </Text>
             </ChakraLink>
-            <Text 
-              cursor="pointer" 
+            <ChakraLink 
+              as={RouterLink} 
+              to="/about"
               _hover={{ 
                 color: scrolled ? 'whiteAlpha.700' : 'gray.800',
+                textDecoration: 'none',
                 ...(scrolled ? {} : {
                   bgGradient: "linear(to-r, #179c5f, #46cc6b)",
                   bgClip: "text"
                 })
               }}
             >
-              Features
-            </Text>
-            <Text 
-              cursor="pointer" 
+              <Text 
+                fontWeight="medium" 
+                color={scrolled ? "white" : "gray.600"}
+                transition="color 0.3s ease"
+                _hover={{ color: scrolled ? 'whiteAlpha.700' : 'gray.800' }}
+              >
+                About
+              </Text>
+            </ChakraLink>
+            <ChakraLink 
+              as={RouterLink} 
+              to="/contact"
               _hover={{ 
                 color: scrolled ? 'whiteAlpha.700' : 'gray.800',
+                textDecoration: 'none',
                 ...(scrolled ? {} : {
                   bgGradient: "linear(to-r, #179c5f, #46cc6b)",
                   bgClip: "text"
                 })
               }}
             >
-              About
-            </Text>
-            <Text 
-              cursor="pointer" 
-              _hover={{ 
-                color: scrolled ? 'whiteAlpha.700' : 'gray.800',
-                ...(scrolled ? {} : {
-                  bgGradient: "linear(to-r, #179c5f, #46cc6b)",
-                  bgClip: "text"
-                })
-              }}
-            >
-              Contact
-            </Text>
+              <Text 
+                fontWeight="medium" 
+                color={scrolled ? "white" : "gray.600"}
+                transition="color 0.3s ease"
+                _hover={{ color: scrolled ? 'whiteAlpha.700' : 'gray.800' }}
+              >
+                Contact
+              </Text>
+            </ChakraLink>
           </HStack>
 
           {/* Mobile Hamburger Menu */}
@@ -181,6 +223,17 @@ function Navbar() {
                   </ChakraLink>
                   <ChakraLink 
                     as={RouterLink} 
+                    to="/features"
+                    onClick={onClose}
+                    _hover={{ 
+                      color: 'green.500',
+                      textDecoration: 'none'
+                    }}
+                  >
+                    Features
+                  </ChakraLink>
+                  <ChakraLink 
+                    as={RouterLink} 
                     to="/pricing"
                     onClick={onClose}
                     _hover={{ 
@@ -190,33 +243,28 @@ function Navbar() {
                   >
                     Pricing
                   </ChakraLink>
-                  <Text 
-                    cursor="pointer"
+                  <ChakraLink 
+                    as={RouterLink} 
+                    to="/about"
                     onClick={onClose}
                     _hover={{ 
-                      color: 'green.500'
-                    }}
-                  >
-                    Features
-                  </Text>
-                  <Text 
-                    cursor="pointer"
-                    onClick={onClose}
-                    _hover={{ 
-                      color: 'green.500'
+                      color: 'green.500',
+                      textDecoration: 'none'
                     }}
                   >
                     About
-                  </Text>
-                  <Text 
-                    cursor="pointer"
+                  </ChakraLink>
+                  <ChakraLink 
+                    as={RouterLink} 
+                    to="/contact"
                     onClick={onClose}
                     _hover={{ 
-                      color: 'green.500'
+                      color: 'green.500',
+                      textDecoration: 'none'
                     }}
                   >
                     Contact
-                  </Text>
+                  </ChakraLink>
                 </VStack>
               </DrawerBody>
             </DrawerContent>
